@@ -2,7 +2,7 @@ name: Yatzy
 version: ${project.version}
 main: live.mufin.yatzy.Yatzy
 api-version: 1.17
-
+author: mufinlive
 commands:
   yatzy:
   challenge:

@@ -1,7 +1,9 @@
 package live.mufin.yatzy.GUI;
 
+import live.mufin.yatzy.Validating;
 import live.mufin.yatzy.Yatzy;
 import live.mufin.yatzy.datatypes.Dice;
+import live.mufin.yatzy.datatypes.Game;
 import live.mufin.yatzy.datatypes.GamePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,6 +15,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,120 +24,115 @@ public class Items {
     public static NamespacedKey key = new NamespacedKey(Yatzy.getInstance(), "id");
 
     public static ItemStack ones(GamePlayer p) {
-        for(Dice dice : p.getDie()) {
-            if(dice.getNumber() == 1) {
-                return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Ones");
-            }
+        if(Validating.ones(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Ones");
         }
         return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Ones");
     }
     public static ItemStack twos(GamePlayer p) {
-        for(Dice dice : p.getDie()) {
-            if(dice.getNumber() == 2) {
-                return itemWithName(Material.GREEN_STAINED_GLASS, 2, ChatColor.GRAY + "Twos");
-            }
+        if(Validating.twos(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Twos");
         }
-        return itemWithName(Material.TINTED_GLASS, 2, ChatColor.GRAY + "Twos");
+        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Twos");
     }
     public static ItemStack threes(GamePlayer p) {
-        for(Dice dice : p.getDie()) {
-            if(dice.getNumber() == 3) {
-                return itemWithName(Material.GREEN_STAINED_GLASS, 3, ChatColor.GRAY + "Threes");
-            }
+        if(Validating.threes(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Threes");
         }
-        return itemWithName(Material.TINTED_GLASS, 3, ChatColor.GRAY + "Threes");
+        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Threes");
     }
     public static ItemStack fours(GamePlayer p) {
-        for(Dice dice : p.getDie()) {
-            if(dice.getNumber() == 4) {
-                return itemWithName(Material.GREEN_STAINED_GLASS, 4, ChatColor.GRAY + "Fours");
-            }
+        if(Validating.fours(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Fours");
         }
-        return itemWithName(Material.TINTED_GLASS, 4, ChatColor.GRAY + "Fours");
+        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Fours");
     }
     public static ItemStack fives(GamePlayer p) {
-        for(Dice dice : p.getDie()) {
-            if(dice.getNumber() == 5) {
-                return itemWithName(Material.GREEN_STAINED_GLASS, 5, ChatColor.GRAY + "Fives");
-            }
+        if(Validating.fives(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Fives");
         }
-        return itemWithName(Material.TINTED_GLASS, 5, ChatColor.GRAY + "Fives");
+        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Fives");
     }
     public static ItemStack sixes(GamePlayer p) {
-        for(Dice dice : p.getDie()) {
-            if(dice.getNumber() == 6) {
-                return itemWithName(Material.GREEN_STAINED_GLASS, 6, ChatColor.GRAY + "Sixes");
-            }
+        if(Validating.sixes(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Sixes");
         }
-        return itemWithName(Material.TINTED_GLASS, 6, ChatColor.GRAY + "Sixes");
+        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Sixes");
     }
     public static ItemStack threeOfAKind(GamePlayer p) {
-        ArrayList<Integer> diceScores = new ArrayList<Integer>();
-        p.getDie().forEach(dice -> diceScores.add(dice.getNumber()));
-        if(Collections.frequency(diceScores, 1) >= 3) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Three Of A Kind");
-        }if(Collections.frequency(diceScores, 2) >= 3) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Three Of A Kind");
-        }if(Collections.frequency(diceScores, 3) >= 3) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Three Of A Kind");
-        }if(Collections.frequency(diceScores, 4) >= 3) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Three Of A Kind");
-        }if(Collections.frequency(diceScores, 5) >= 3) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Three Of A Kind");
-        }if(Collections.frequency(diceScores, 6) >= 3) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Three Of A Kind");
+        if(Validating.threeOfAKind(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Three of a Kind");
         }
-
-        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Three Of A Kind");
+        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Three of a Kind");
     }
     public static ItemStack fourOfAKind(GamePlayer p) {
-        ArrayList<Integer> diceScores = new ArrayList<Integer>();
-        p.getDie().forEach(dice -> diceScores.add(dice.getNumber()));
-        if(Collections.frequency(diceScores, 1) >= 4) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Four Of A Kind");
-        }if(Collections.frequency(diceScores, 2) >= 4) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Four Of A Kind");
-        }if(Collections.frequency(diceScores, 3) >= 4) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Four Of A Kind");
-        }if(Collections.frequency(diceScores, 4) >= 4) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Four Of A Kind");
-        }if(Collections.frequency(diceScores, 5) >= 4) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Four Of A Kind");
-        }if(Collections.frequency(diceScores, 6) >= 4) {
-            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Four Of A Kind");
+        if(Validating.fourOfAKind(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Four of a Kind");
         }
-        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Four Of A Kind");
+        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Four of a Kind");
     }
     public static ItemStack fullHouse(GamePlayer p) {
+        if(Validating.fullHouse(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Full House");
+        }
         return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Full House");
     }
 
     public static ItemStack smallStreet(GamePlayer p) {
-        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Small Street");
+        if(Validating.smallStraight(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Small Straight");
+        }
+        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Small Straight");
     }
     public static ItemStack bigStreet(GamePlayer p) {
-        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Big Street");
+        if(Validating.bigStraight(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Big Straight");
+        }
+        return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Big Straight");
     }
     public static ItemStack yatzy(GamePlayer p) {
+        if(Validating.yatzy(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Yatzy");
+        }
         return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Yatzy");
     }
     public static ItemStack chance(GamePlayer p) {
+        if(Validating.chance(p)) {
+            return itemWithName(Material.GREEN_STAINED_GLASS, 1, ChatColor.GRAY + "Chance");
+        }
         return itemWithName(Material.TINTED_GLASS, 1, ChatColor.GRAY + "Chance");
     }
 
-    public static ItemStack roll = itemWithName(Material.MAGENTA_GLAZED_TERRACOTTA, 1, ChatColor.DARK_GREEN + "Roll!", "ROLL");
+    public static ItemStack roll(Game game) {
+        if(game.getCurrentTurn() >= 3) {
+            return itemWithName(Material.RED_CONCRETE, 1, ChatColor.RED + "You have ran out of turns!", "ROLL");
+        }
+        return itemWithName(Material.MAGENTA_GLAZED_TERRACOTTA, 1, ChatColor.DARK_GREEN + "Roll!", "ROLL");
+    }
     public static ItemStack pane = itemWithName(Material.BLACK_STAINED_GLASS_PANE, 1, ChatColor.RESET + "", "PANE");
 
 
     public static ItemStack diceItem(Dice dice) {
-        if(dice.getNumber() == 0) {
-            return itemWithName(Material.GRAY_CONCRETE, 1, ChatColor.RESET + "", "DICE");
-        }
         if(dice.isHeld()) {
-            return itemWithName(Material.GREEN_CONCRETE, dice.getNumber(), String.valueOf(dice.getNumber()), "DICE");
-        } else {
-            return itemWithName(Material.WHITE_CONCRETE, dice.getNumber(), String.valueOf(dice.getNumber()), "DICE");
+            return itemWithName(Material.GREEN_CONCRETE, dice.getNumber(), ChatColor.DARK_GREEN + "" + ChatColor.BOLD + dice.getNumber(), "DICE");
         }
+        switch(dice.getNumber()) {
+            case 0:
+                return itemWithName(Material.GRAY_CONCRETE, 1, ChatColor.RESET + "", "DICE");
+            case 1:
+                return itemWithName(Material.RED_CONCRETE, 1, ChatColor.RED + "1", "DICE");
+            case 2:
+                return itemWithName(Material.ORANGE_CONCRETE, 2, ChatColor.GOLD + "2", "DICE");
+            case 3:
+                return itemWithName(Material.YELLOW_CONCRETE, 3, ChatColor.YELLOW + "3", "DICE");
+            case 4:
+                return itemWithName(Material.BLUE_CONCRETE, 4, ChatColor.DARK_BLUE + "4", "DICE");
+            case 5:
+                return itemWithName(Material.CYAN_CONCRETE, 5, ChatColor.DARK_AQUA + "5", "DICE");
+            case 6:
+                return itemWithName(Material.LIGHT_BLUE_CONCRETE, 6, ChatColor.BLUE + "6", "DICE");
+        }
+        return itemWithName(Material.WHITE_CONCRETE, dice.getNumber(), String.valueOf(dice.getNumber()), "DICE");
     }
 
     public static ItemStack statsItem(GamePlayer p) {
@@ -158,7 +156,7 @@ public class Items {
     private static ItemStack itemWithName(Material m, int amount, String name) {
         ItemStack item = new ItemStack(m, amount);
         ItemMeta meta = item.getItemMeta();
-        meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, name.toUpperCase().replaceAll(" ", "_"));
+        meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, ChatColor.stripColor(name.toUpperCase().replaceAll(" ", "_")));
         meta.setDisplayName(name);
         item.setItemMeta(meta);
         return item;

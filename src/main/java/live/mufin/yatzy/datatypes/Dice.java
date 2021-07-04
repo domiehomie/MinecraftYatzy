@@ -20,6 +20,10 @@ public class Dice {
         this.number = number;
     }
 
+    public void setHeld(boolean held) {
+        this.isHeld = held;
+    }
+
     public int getNumber() {
         return number;
     }

@@ -9,16 +9,29 @@ import java.util.UUID;
 
 public class GamePlayer {
 
+    Game game;
     Player player;
     LinkedList<Dice> die;
     HashMap<ScoreOption, Integer> scores;
     int totalScore;
 
-    public GamePlayer(Player player, LinkedList<Dice> die, HashMap<ScoreOption, Integer> scores, int totalScore) {
+    public GamePlayer(Player player, LinkedList<Dice> die, int totalScore) {
         this.player = player;
         this.die = die;
-        this.scores = scores;
+        this.scores = new HashMap<>();
         this.totalScore = totalScore;
+    }
+
+    public void setTotalScore(int score) {
+        this.totalScore = score;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public LinkedList<Dice> getDie() {
